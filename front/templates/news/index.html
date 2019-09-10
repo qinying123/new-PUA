@@ -1,0 +1,122 @@
+{% extends 'base/front_base.html' %}
+{% load news_filters %}
+
+{% block title %}
+PUA首页
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/index.min.css' %}">
+    <script src="{% static 'js/index.min.js' %}"></script>
+    <script src="{% static 'arttemplate/template-web.js' %}"></script>
+    <script type="text/javascript" src="https://www.draw.io/js/viewer.min.js"></script>
+    <script id="news-item" type="text/html">
+{% verbatim %}
+{{ each newses news index }}
+<li>
+    <div class="thumbnail-group">
+        <a href="/news/{{ news.id }}/">
+            <img src="{{ news.thumbnail }}" alt="">
+        </a>
+    </div>
+    <div class="news-group">
+        <p class="title">
+            <a href="/news/{{ news.id }}/">{{ news.title }}</a>
+        </p>
+        <p class="desc">
+            {{ news.desc }}
+        </p>
+        <p class="more">
+           <span class="category">{{ news.category.name }}</span>
+            <span class="pub-time">{{ news.pub_time|timeSince }}</span>
+            <span class="author">{{ news.author.username }}</span>
+        </p>
+    </div>
+</li>
+{{ /each }}
+{% endverbatim %}
+</script>
+{% endblock %}
+{% block main %}
+    <div class="main">
+        <div class="wrapper">
+            <div class="news-wrapper">
+                <div class="banner-group" id="banner-group">
+                    <ul class="banner-ul" id="banner-ul">
+                        <li>
+                            <img src="{% static 'images/p3.jpg' %}" alt="">
+                        </li>
+                        <li>
+                            <img src="{% static 'images/p1.jpg' %}" alt="">
+                        </li>
+                        <li>
+                            <img src="{% static 'images/p2.jpg' %}" alt="">
+                        </li>
+                    </ul>
+                    <span class="arrow left-arrow">‹</span>
+                    <span class="arrow right-arrow">›</span>
+                    <div class="page-control-group">
+                        <ul class="page-control"></ul>
+                    </div>
+
+                    <div data-v-626ea1ea="" class="zm-component-main" style="position: absolute; width: 600px; height: 500px; left: 429px; top: 102.5px;"><div data-v-626ea1ea="" class="zm-component-main-container is-container" style="background-color: rgba(255, 255, 255, 0); border: 1px solid rgb(203, 202, 202); border-radius: 0px; box-shadow: none;"></div><div data-v-0a6ea4f2="" data-v-626ea1ea="" id="xagq3j53tiu8" class="zm-component-mains" style="position: absolute; width: 520px; height: 420px; left: 40px; top: 40px; transform: rotate(0deg);"><div data-v-0a6ea4f2="" class="zm-component-shape-main"><div data-v-0a6ea4f2="" class="zm-component-shape-block"><svg class="zm-component-shape-SVGicon" style="stroke:#000;stroke-width:0px;width:520px;height:420px;" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="15.30499267578125 10.052000045776367 123 123" oriscale="1.1804008908685968" data-view="15.30499267578125 10.052000045776367 123 123"> <g> <path style="fill: rgba(188,188,188,0.26);vector-effect: non-scaling-stroke" d="M138.305 10.052v123h-123v-123h123z"></path> </g> </svg></div></div></div><div data-v-7b5f28d6="" data-v-626ea1ea="" id="xhk0id1nb8u8" class="" style="position: absolute; width: 397px; height: 262px; left: 108.5px; top: 120px; transform: rotate(0deg);"><div data-v-7b5f28d6="" class="pc_text" style="padding-left: 2px; text-align: center;"><span style="font-style: italic; text-indent: 0.01px; box-sizing: border-box; background-color: rgba(0, 0, 0, 0); font-size: 12px;"><span style="box-sizing: border-box; text-indent: 0.01px; font-style: italic; font-size: 12px;" id=""><span color="#239969" face="华文楷体" id="" class=""><span id="" style="font-size: 70px; text-indent: 0.01px; box-sizing: border-box; color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0); font-style: italic; font-family: 华文楷体; font-weight: 800;">不良</span><span style="box-sizing: border-box; font-size: 100px; text-indent: 0.01px; background-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); font-style: italic; font-family: 华文楷体; font-weight: 800;" id="">PUA</span></span><br id="" style=""><span color="#239969" face="华文楷体" style="color: rgb(255, 255, 255); font-family: 华文楷体; font-size: 18px; font-weight: 800; text-indent: 0.01px; box-sizing: border-box; background-color: rgba(0, 0, 0, 0); font-style: italic;" class="" id=""><br id="" style=""></span></span><br id="" style=""><span style="box-sizing: border-box; font-style: italic; color: rgb(255, 255, 255); font-family: 华文楷体; font-size: 18px; font-weight: 800; text-indent: 0.01px; background-color: rgba(0, 0, 0, 0);" id="">我们用无限的可能为您普及PUA发展概况</span><br id="" style=""><span style="box-sizing: border-box; font-style: italic; color: rgb(255, 255, 255); font-family: 华文楷体; font-size: 18px; font-weight: 800; text-indent: 0.01px; background-color: rgba(0, 0, 0, 0);" id=""><br id="" style=""></span><span style="box-sizing: border-box; font-style: italic; color: rgb(255, 255, 255); font-family: 华文楷体; font-size: 18px; font-weight: 800; text-indent: 0.01px; background-color: rgba(0, 0, 0, 0);" id="">We use infinite possibilities to popularize the development of PUA for you&nbsp;</span><br id="" style=""><span id=""><span style="box-sizing: border-box; font-style: italic; color: rgb(255, 255, 255); font-family: 华文楷体; font-size: 18px; font-weight: 800; text-indent: 0.01px; background-color: rgba(0, 0, 0, 0);">It is quite dangerous.</span><br id="" style=""></span></span></div></div></div>
+                </div>
+                <div class="ppt">
+                    <iframe style="width:100%;height:480px" src="http://fs.focusky.com.cn/wpqc/ighb/index.html" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" ></iframe>
+                </div>
+                <div class="intro1">
+                    <div data-v-626ea1ea="" data-v-10b62666="" class="zm-component-main" style="position: absolute; width: 432px; height: 97px; left: 420px; top: 50px;"><div data-v-626ea1ea="" class="zm-component-main-container is-container" style="background-color: rgb(255, 255, 255); border: 0px solid rgb(229, 240, 241); border-radius: 0px; box-shadow: none;"></div><div data-v-5e89450d="" data-v-626ea1ea="" id="xyqe159nu0r7" class="zm-component-mains" style="position: absolute; width: 169px; height: 21px; left: 132px; top: 68px; transform: rotate(0deg);"><div data-v-5e89450d="" class="zm-component-shape-main"><svg data-v-5e89450d="" style="stroke: rgb(201, 200, 200); stroke-width: 1; height: 1px;"><g data-v-5e89450d=""><path data-v-5e89450d="" stroke-dasharray="0,0" d="M0 0.5 169  0.5" class="horizontalLine"></path></g></svg></div></div><div data-v-5e89450d="" data-v-626ea1ea="" id="xiap04hua0co" class="zm-component-mains" style="position: absolute; width: 80px; height: 25px; left: 176px; top: 66px; transform: rotate(0deg);"><div data-v-5e89450d="" class="zm-component-shape-main"><svg data-v-5e89450d="" style="stroke: rgb(255, 102, 55); stroke-width: 5; height: 5px;"><g data-v-5e89450d=""><path data-v-5e89450d="" stroke-dasharray="0,0" d="M0 2.5 80  2.5" class="horizontalLine"></path></g></svg></div></div><div data-v-5722a7a6="" data-v-626ea1ea="" id="x9e3o48a6kpg" class="" style="position: absolute; width: 432px; height: 30px; left: 0px; top: 25px; transform: rotate(0deg);"><div data-v-5722a7a6="" class="pc_text" style="padding-left: 2px; text-align: center;"><span><span style="background-color: rgba(0, 0, 0, 0); box-sizing: border-box; font-size: 26px; text-indent: 0.01px;">不良PUA</span><span style="font-size: 26px; text-indent: 0.01px; box-sizing: border-box; background-color: rgba(0, 0, 0, 0); color: rgb(255, 102, 55);">五步陷阱法</span></span></div></div></div>
+                </div>
+                <div class="five-group">
+                    <div class="mxgraph" style="margin-top: 0;max-width:100%;margin: 0 auto;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile userAgent=\&quot;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36\&quot; version=\&quot;6.7.8\&quot; editor=\&quot;www.draw.io\&quot; type=\&quot;online\&quot;&gt;&lt;diagram id=\&quot;ed185da6-539f-7d1c-5c39-7667a93f58ce\&quot; name=\&quot;第1页面\&quot;&gt;7VjLcpswFP0a7RECIS2FDemmM53JomtqZMMEIxfk2OnX90oIYwKdZBLqjZPJJOIICXHPuS8QWe3PD012KL6rXFbI9/IzImvk+1FA4a8BXjogCHkH7Joy7yBvAB7LP7IDsQOPZS7bEaSVqnR5GIMbVddyo0cbZk2jTuPbtqrKR8Ah28kJ8LjJqin6s8x10aHMpwP+TZa7wj0ZY+pe71e2edo16li75yGfbO1PN73P+r3cYdsiy9XpCiIJIqtGKd2N9ueVrIxlx1ZL/zF7OXcja/2uBX634jmrju7dURKgOEZxhJIQMQ/FK5RQJOCXWSRF3Jmh1S+9wewrS7Oph0h8KkotHw/ZxsyeQCCAFXpfwRWGYZ61hb23v/iRaS2b2iK+FwDa6kY9XWwPZom3ZVWtVKUa+8DeqoCrWjv94GFlf2etapiJp2ZxlnqWjZbnK8iZ6UGqvdTNC9ziZgOfdUucon1nudOgD9yzWlxpg/aydJLcXXYeaIGBY2aepRmSXhMAC8A55NvGz9pD5zHb8mxIeNvUaZquBH6vqXdNlpdg5hFXOaf0am5dNnCGUhnGZdbqZRjySTRiiLEJQz4PpwxdwM9QRGYoopV2VrOhqrcH/X1U3StfYsMA0Z39D44mQhSv3YCBM3LEufVKGDAU435/OFn3CLf0lspgNA3oR5Xh4HdEgyXcl3kjceAwmKgjmhFHtIA2goW1QREjiIV2ECCeooQZbXDPqCVO7NQdq2UuyrTqaI61hJJIMFZSME0E3J8Kqcc+I6RweSElSEDGj1Ac2MEdy2aJIBPgkTSIF90syNCFtREhvjblH8SWOO0l8aWNj1cnIXuljfBm2ogWjxscIxHZviBFDH9p45Pa6NuwS3Hi3UwbbKoNU0VAAyhMEBAxYrFtCYVFGBKJqTHurwEM6SuS6NSB/1sHyGdY4iZjCxuhoTtn1PK2tmncuqDA98gSIeMwi/ntWMLerDNBkWV8yCZSYQdAjfmaEtmoCU0eMZnWxNGp59n+D8KtqdGEIfr+OGX0zaoK93FsFB6jBSjF85Ri25NTw5tJhMwkQmE7MbgU5IrSabcGg5VdzmzZTe6Q0kksnSY8TPAiXgqXw/dUO3f1yZokfwE=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+                    <script type="text/javascript" src="https://www.draw.io/js/viewer.min.js"></script>
+                </div>
+                <div class="hz">
+                    <div data-v-71fc1ffe="" class="is-container banner-container"><div data-v-5722a7a6="" data-v-71fc1ffe="" id="xydd78139hh9" class="" style="position: absolute; width: 800px; height: 100px; left: 300px; top: 58px; transform: rotate(0deg);"><div data-v-5722a7a6="" class="pc_text" style="padding-left: 2px; text-align: left;"><span style="font-size: 36px; text-indent: 0.01px; font-family: 微软雅黑; background-color: rgba(0, 0, 0, 0); box-sizing: border-box; color: rgb(255, 255, 255);" class="">"三十秒搭讪，两小时接吻，六小时推倒......"</span></div></div><div data-v-0ac331f8="" data-v-71fc1ffe="" id="x4l3jdee5r8o" class="zm-component-mains" style="position: absolute; width: 45px; height: 5px; left: 642.5px; top: 149px; transform: rotate(0deg);"><div data-v-0ac331f8="" class="zm-component-shape-main"><div data-v-0ac331f8="" class="zm-component-shape-block"><div class="shape-box" style="background-color:rgba(255,255,255,1); border-color:#000;border-width:0px;width:100%;height:100%;border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-right-radius:0px;border-bottom-left-radius:0px;border-style:solid;"></div></div></div></div><div data-v-5722a7a6="" data-v-71fc1ffe="" id="xhb4t32c0g5g" class="" style="position: absolute; width: 659px; height: 72px; left: 335.5px; top: 194px; transform: rotate(0deg);"><div data-v-5722a7a6="" class="pc_text" style="padding-left: 2px; text-align: center;"><span style="box-sizing: border-box; text-indent: 0.01px; background-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); line-height: 1.8em; font-size: 12px;"><span id="" style="font-family: 微软雅黑; text-indent: 0.01px; background-color: rgba(0, 0, 0, 0); box-sizing: border-box; color: rgb(255, 255, 255); line-height: 1.8em; font-size: 12px;"><span style="font-size: 20px; text-indent: 0.01px; font-family: 微软雅黑; box-sizing: border-box; color: rgb(255, 255, 255); line-height: 1.8em;" id="">这些批量生产的渣男，可能就在我们身边！</span><span style="font-size: 20px; text-indent: 0.01px; font-family: 微软雅黑; box-sizing: border-box; color: rgb(255, 255, 255); line-height: 1.8em;" id=""></span><span style="font-size: 20px; text-indent: 0.01px; font-family: 微软雅黑; box-sizing: border-box; color: rgb(255, 255, 255); line-height: 1.8em;" id=""></span><br id="" style=""><span style="font-size: 20px; text-indent: 0.01px; font-family: 微软雅黑; box-sizing: border-box; color: rgb(255, 255, 255); line-height: 1.8em;" id=""></span></span><br id="" style=""><span style="box-sizing: border-box; text-indent: 0.01px; background-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); line-height: 1.8em;">      </span></span></div></div></div>
+                </div>
+                <div class="intro3">
+                    <div class="zm-component-main" style="position: absolute; width: 432px; height: 99px; left: 384px; top: 50px;"><div data-v-626ea1ea="" class="zm-component-main-container is-container" style="background-color: rgb(255, 255, 255); border: 0px solid rgb(229, 240, 241); border-radius: 0px; box-shadow: none;"></div><div data-v-5e89450d="" data-v-626ea1ea="" id="xbitqr79ke5o" class="zm-component-mains" style="position: absolute; width: 169px; height: 21px; left: 132px; top: 70px; transform: rotate(0deg);"><div data-v-5e89450d="" class="zm-component-shape-main"><svg data-v-5e89450d="" style="stroke: rgb(201, 200, 200); stroke-width: 1; height: 1px;"><g data-v-5e89450d=""><path data-v-5e89450d="" stroke-dasharray="0,0" d="M0 0.5 169  0.5" class="horizontalLine"></path></g></svg></div></div><div data-v-5e89450d="" data-v-626ea1ea="" id="xqn3g1brnstg" class="zm-component-mains" style="position: absolute; width: 80px; height: 25px; left: 176px; top: 68px; transform: rotate(0deg);"><div data-v-5e89450d="" class="zm-component-shape-main"><svg data-v-5e89450d="" style="stroke: rgb(255,102,55); stroke-width: 5; height: 5px;"><g data-v-5e89450d=""><path data-v-5e89450d="" stroke-dasharray="0,0" d="M0 2.5 80  2.5" class="horizontalLine"></path></g></svg></div></div><div data-v-5722a7a6="" data-v-626ea1ea="" id="xuai2ptthha8" class="" style="position: absolute; width: 432px; height: 32px; left: 0px; top: 25px; transform: rotate(0deg);"><div data-v-5722a7a6="" class="pc_text" style="padding-left: 2px; text-align: center;"><span style="font-size: 26px; text-indent: 0.01px; box-sizing: border-box;"><span><span style="font-size: 26px; text-indent: 0.01px; box-sizing: border-box; background-color: rgba(0, 0, 0, 0); color: rgb(255, 102, 55);">案例展示</span><span style="font-size: 26px; text-indent: 0.01px; box-sizing: border-box; background-color: rgba(0, 0, 0, 0); color: rgb(255, 102, 55);"><span style="font-family: 黑体; font-size: 26px; color: rgb(121, 121, 121); background-color: rgba(0, 0, 0, 0); font-style: normal; font-weight: 400; text-decoration: none; text-shadow: none; letter-spacing: 0px; line-height: normal;" id="">/CASESHOW</span></span></span></span></div></div></div>
+                </div>
+                <div class="news-group">
+                    <div class="list-outer-group">
+                        <ul type="none" class="list-tab">
+                            <li data-category="0" class="active"><a href="javascript:void(0);">最新资讯</a></li>
+                           {% for category in categories %}
+                                <li data-category="{{ category.pk }}"><a href="javascript:void(0);">{{ category.name }}</a></li>
+                           {% endfor %}
+                        </ul>
+                        <ul type="none" class="list-inner-group">
+                            {% for news in newses %}
+                              <li>
+                                <div class="thumbnail-group">
+                                    <a href="{% url 'news:news_detail' news_id=news.pk %}">
+                                        <img src="{{ news.thumbnail }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="news-group">
+                                    <p class="title">
+                                        <a href="{% url 'news:news_detail' news_id=news.pk %}">
+                                         {{ news.title }}
+                                        </a>
+                                    </p>
+                                    <p class="desc">
+                                        {{ news.desc }}
+                                    </p>
+                                    <p class="more">
+                                        <span class="category">{{ news.category.name }}</span>
+                                        <span class="pub-time">{{ news.pub_time|time_since }}</span>
+                                        <span class="author">{{ news.author.username }}</span>
+                                    </p>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="load-more-group">
+                            <button class="load-more" id="load-more-btn">查看更多</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

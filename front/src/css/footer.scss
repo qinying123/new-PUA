@@ -1,0 +1,86 @@
+@import "init.scss";
+@import "constants.scss";
+body{
+    background: #ffffff;
+}
+.fotter{
+    width: 100%;
+    font-size: 14px;
+    color: #c9c9c9;
+
+    .top-group{
+        width: 100%;
+        height: 80px;
+        background: #ff6637;
+        padding-top: 30px;
+        opacity: 0.9;
+
+        .top-inner-group{
+            width: 1000px;
+            height: 80px;
+            margin: 0 auto;
+            overflow: hidden;
+
+            .box1{
+                width: 150px;
+                height: 54px;
+                float: left;
+                margin-left: 150px;
+                img{
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+
+            .detail-group{
+                float: left;
+                margin-left: 35px;
+
+                .line1{
+                    overflow: hidden;
+                    margin-left: 100px;
+                    .links{
+                        overflow: hidden;
+                        float: left;
+                        li{
+                            float: left;
+                            padding: 0 10px;
+                            &:first-of-type{
+                                padding-left: 0;
+                            }
+                            &:last-of-type{
+                                border-right: none;
+                            }
+                            a{
+                                color: #c9c9c9;
+                            }
+
+                            border-right: 1px solid #c9c9c9;
+                        }
+                    }
+                }
+
+                .line2{
+                    overflow: hidden;
+                    margin-top: 20px;
+                    .address{
+                        float: left;
+                    }
+                    .contact{
+                        float: left;
+                        margin-left: 20px;
+                    }
+                }
+
+            }
+        }
+    }
+
+    .bottom-group{
+        background: #383e44;
+        height: 60px;
+        width: 100%;
+        text-align: center;
+        line-height: 60px;
+    }
+}

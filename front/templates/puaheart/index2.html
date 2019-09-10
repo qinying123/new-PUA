@@ -1,0 +1,452 @@
+{% extends 'base/header.html' %}
+
+{% block title %}
+    PUA心理测试
+{% endblock %}
+
+{% block head %}
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common.min.css' %}">
+    <style type="text/css">
+.demo{width:760px; margin:60px auto 10px auto}
+#hello{position: absolute;
+    left: 1000px;
+    top: 200px;}
+</style>
+    <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/quiz.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/echarts.min.js' %} "></script>
+    <script>
+var init={'questions':[{'question':'刚认识的时候，你们交流的频率','answers':['频繁','较多','适中','较少'],'correctAnswer':3},{'question':'他和你聊天时高谈阔论、夸夸而谈，虽然他说起话来滴水不漏的，却丝毫不能让你感到真诚；或者他和你说话说时口齿笨拙的，让你感到漏洞百出，有一种难以言说的造作感。','answers':['总是','有时','很少','从不'],'correctAnswer':3},{'question':'他和你交谈是直流，只有他强行输出，他更关心自己。','answers':['总是','有时','很少','从不'],'correctAnswer':4},{'question':'他和你的身体接触，往往来得强势而具有侵占性，像是在演绎国产玛丽苏剧里的“霸道总裁”。当你们还不熟悉彼此时，他可能就有很多小动作，比如借机搂你的腰，蹭你的胸，或在餐桌下将手伸向你大腿。','answers':['总是','有时','很少','从不'],'correctAnswer':4},{'question':'他会言语打压你。他会数落你的观点，让你觉得你的想法一文不值，再灌输给你他的价值观。','answers':['总是','有时','很少','从不'],'correctAnswer':4},{'question':'他会让你送他钱财及贵重礼物','answers':['从不','总是','有时','很少'],'correctAnswer':1},{'question':'无论是你有什么好事或者很不好的事情，他表现的冷静的让人不可思议，甚至可以说是有点冷漠。相较于最初的种种关心，贴切和问候，如今仿佛是和一个陌生人在相处一般。甚至是在你打电话过去的时候，他玩失踪。','answers':['总是','有时','很少','从不'],'correctAnswer':2},{'question':'处于交往时，关于性方面，TA会','answers':['有点强势的要求你','直白的说出需要','说保证对你负责','与你进行沟通'],'correctAnswer':4},{'question':'TA与其他女孩子的合照','answers':['有很多，而且暧昧','日常生活中的合照','很少，都是多人合照','几乎没有'],'correctAnswer':4},{'question':'你们认识的时间久了，TA会','answers':['向你诉说分享苦闷','试探你的心意','有时间才来找你聊天','时间越长，聊天越少'],'correctAnswer':1}]};
+
+$(function(){
+	$('#quiz-container').jquizzy({
+        questions: init.questions
+    });
+});
+</script>
+    <style>
+.box{
+    width:1100px; margin-top:100px;  padding:5px;
+    height:420px; border:1px #111 solid;
+    display:none;            /* 默认对话框隐藏 */
+	border-radius:20px 10px 50px 30px;
+    position: absolute;
+    left: 80px;
+    top: 720px;
+}
+{#    body {#}
+{#    display: flex;#}
+{#    height: 100vh;#}
+{#    align-items: center;#}
+{#    justify-content: center;#}
+{#    background: white;#}
+{#}#}
+.btn-liquid {
+    display: inline-block;
+    position: relative;
+    width: 240px;
+    height: 60px;
+    border-radius: 27px;
+    color: #fff;
+    font: 700 14px/60px "Droid Sans", sans-serif;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.btn-liquid .inner {
+    position: relative;
+    z-index: 2;
+}
+.btn-liquid canvas {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    bottom: -50px;
+    left: -50px;
+    z-index: 1;
+}
+</style>
+<script>
+$(document).ready(function(){//实现结果滑动弹出或者淡出、淡入
+	$("#hello").click(function(){
+
+		$("#inputbox").slideToggle("slow");
+
+	});
+});
+</script>
+    <script>
+    $(function() {
+    // Vars
+    var pointsA = [],
+        pointsB = [],
+        $canvas = null,
+        canvas = null,
+        context = null,
+        vars = null,
+        points = 8,
+        viscosity = 20,
+        mouseDist = 70,
+        damping = 0.05,
+        showIndicators = false;
+    mouseX = 0,
+        mouseY = 0,
+        relMouseX = 0,
+        relMouseY = 0,
+        mouseLastX = 0,
+        mouseLastY = 0,
+        mouseDirectionX = 0,
+        mouseDirectionY = 0,
+        mouseSpeedX = 0,
+        mouseSpeedY = 0;
+
+    /**
+     * Get mouse direction
+     */
+    function mouseDirection(e) {
+        if (mouseX < e.pageX)
+            mouseDirectionX = 1;
+        else if (mouseX > e.pageX)
+            mouseDirectionX = -1;
+        else
+            mouseDirectionX = 0;
+
+        if (mouseY < e.pageY)
+            mouseDirectionY = 1;
+        else if (mouseY > e.pageY)
+            mouseDirectionY = -1;
+        else
+            mouseDirectionY = 0;
+
+        mouseX = e.pageX;
+        mouseY = e.pageY;
+
+        relMouseX = (mouseX - $canvas.offset().left);
+        relMouseY = (mouseY - $canvas.offset().top);
+    }
+    $(document).on('mousemove', mouseDirection);
+
+    /**
+     * Get mouse speed
+     */
+    function mouseSpeed() {
+        mouseSpeedX = mouseX - mouseLastX;
+        mouseSpeedY = mouseY - mouseLastY;
+
+        mouseLastX = mouseX;
+        mouseLastY = mouseY;
+
+        setTimeout(mouseSpeed, 50);
+    }
+    mouseSpeed();
+
+    /**
+     * Init button
+     */
+    function initButton() {
+        // Get button
+        var button = $('.btn-liquid');
+        var buttonWidth = button.width();
+        var buttonHeight = button.height();
+
+        // Create canvas
+        $canvas = $('<canvas></canvas>');
+        button.append($canvas);
+
+        canvas = $canvas.get(0);
+        canvas.width = buttonWidth + 100;
+        canvas.height = buttonHeight + 100;
+        context = canvas.getContext('2d');
+
+        // Add points
+
+        var x = buttonHeight / 2;
+        for (var j = 1; j < points; j++) {
+            addPoints((x + ((buttonWidth - buttonHeight) / points) * j), 0);
+        }
+        addPoints(buttonWidth - buttonHeight / 5, 0);
+        addPoints(buttonWidth + buttonHeight / 10, buttonHeight / 2);
+        addPoints(buttonWidth - buttonHeight / 5, buttonHeight);
+        for (var j = points - 1; j > 0; j--) {
+            addPoints((x + ((buttonWidth - buttonHeight) / points) * j), buttonHeight);
+        }
+        addPoints(buttonHeight / 5, buttonHeight);
+
+        addPoints(-buttonHeight / 10, buttonHeight / 2);
+        addPoints(buttonHeight / 5, 0);
+        // addPoints(x, 0);
+        // addPoints(0, buttonHeight/2);
+
+        // addPoints(0, buttonHeight/2);
+        // addPoints(buttonHeight/4, 0);
+
+        // Start render
+        renderCanvas();
+    }
+
+    /**
+     * Add points
+     */
+    function addPoints(x, y) {
+        pointsA.push(new Point(x, y, 1));
+        pointsB.push(new Point(x, y, 2));
+    }
+
+    /**
+     * Point
+     */
+    function Point(x, y, level) {
+        this.x = this.ix = 50 + x;
+        this.y = this.iy = 50 + y;
+        this.vx = 0;
+        this.vy = 0;
+        this.cx1 = 0;
+        this.cy1 = 0;
+        this.cx2 = 0;
+        this.cy2 = 0;
+        this.level = level;
+    }
+
+    Point.prototype.move = function() {
+        this.vx += (this.ix - this.x) / (viscosity * this.level);
+        this.vy += (this.iy - this.y) / (viscosity * this.level);
+
+        var dx = this.ix - relMouseX,
+            dy = this.iy - relMouseY;
+        var relDist = (1 - Math.sqrt((dx * dx) + (dy * dy)) / mouseDist);
+
+        // Move x
+        if ((mouseDirectionX > 0 && relMouseX > this.x) || (mouseDirectionX < 0 && relMouseX < this.x)) {
+            if (relDist > 0 && relDist < 1) {
+                this.vx = (mouseSpeedX / 4) * relDist;
+            }
+        }
+        this.vx *= (1 - damping);
+        this.x += this.vx;
+
+        // Move y
+        if ((mouseDirectionY > 0 && relMouseY > this.y) || (mouseDirectionY < 0 && relMouseY < this.y)) {
+            if (relDist > 0 && relDist < 1) {
+                this.vy = (mouseSpeedY / 4) * relDist;
+            }
+        }
+        this.vy *= (1 - damping);
+        this.y += this.vy;
+    };
+
+
+    /**
+     * Render canvas
+     */
+    function renderCanvas() {
+        // rAF
+        rafID = requestAnimationFrame(renderCanvas);
+
+        // Clear scene
+        context.clearRect(0, 0, $canvas.width(), $canvas.height());
+        context.fillStyle = '#fff';
+        context.fillRect(0, 0, $canvas.width(), $canvas.height());
+
+        // Move points
+        for (var i = 0; i <= pointsA.length - 1; i++) {
+            pointsA[i].move();
+            pointsB[i].move();
+        }
+
+        // Create dynamic gradient
+        var gradientX = Math.min(Math.max(mouseX - $canvas.offset().left, 0), $canvas.width());
+        var gradientY = Math.min(Math.max(mouseY - $canvas.offset().top, 0), $canvas.height());
+        var distance = Math.sqrt(Math.pow(gradientX - $canvas.width() / 2, 2) + Math.pow(gradientY - $canvas.height() / 2, 2)) / Math.sqrt(Math.pow($canvas.width() / 2, 2) + Math.pow($canvas.height() / 2, 2));
+
+        var gradient = context.createRadialGradient(gradientX, gradientY, 300 + (300 * distance), gradientX, gradientY, 0);
+        gradient.addColorStop(0, '#102ce5');
+        gradient.addColorStop(1, '#E406D6');
+
+        // Draw shapes
+        var groups = [pointsA, pointsB]
+
+        for (var j = 0; j <= 1; j++) {
+            var points = groups[j];
+
+            if (j == 0) {
+                // Background style
+                context.fillStyle = '#1CE2D8';
+            } else {
+                // Foreground style
+                context.fillStyle = gradient;
+            }
+
+            context.beginPath();
+            context.moveTo(points[0].x, points[0].y);
+
+            for (var i = 0; i < points.length; i++) {
+                var p = points[i];
+                var nextP = points[i + 1];
+                var val = 30 * 0.552284749831;
+
+                if (nextP != undefined) {
+                    // if (nextP.ix > p.ix && nextP.iy < p.iy) {
+                    // 	p.cx1 = p.x;
+                    // 	p.cy1 = p.y-val;
+                    // 	p.cx2 = nextP.x-val;
+                    // 	p.cy2 = nextP.y;
+                    // } else if (nextP.ix > p.ix && nextP.iy > p.iy) {
+                    // 	p.cx1 = p.x+val;
+                    // 	p.cy1 = p.y;
+                    // 	p.cx2 = nextP.x;
+                    // 	p.cy2 = nextP.y-val;
+                    // }  else if (nextP.ix < p.ix && nextP.iy > p.iy) {
+                    // 	p.cx1 = p.x;
+                    // 	p.cy1 = p.y+val;
+                    // 	p.cx2 = nextP.x+val;
+                    // 	p.cy2 = nextP.y;
+                    // } else if (nextP.ix < p.ix && nextP.iy < p.iy) {
+                    // 	p.cx1 = p.x-val;
+                    // 	p.cy1 = p.y;
+                    // 	p.cx2 = nextP.x;
+                    // 	p.cy2 = nextP.y+val;
+                    // } else {
+
+                    p.cx1 = (p.x + nextP.x) / 2;
+                    p.cy1 = (p.y + nextP.y) / 2;
+                    p.cx2 = (p.x + nextP.x) / 2;
+                    p.cy2 = (p.y + nextP.y) / 2;
+
+                    context.bezierCurveTo(p.x, p.y, p.cx1, p.cy1, p.cx1, p.cy1);
+                    // 	continue;
+                    // }
+
+                    // context.bezierCurveTo(p.cx1, p.cy1, p.cx2, p.cy2, nextP.x, nextP.y);
+                } else {
+                    nextP = points[0];
+                    p.cx1 = (p.x + nextP.x) / 2;
+                    p.cy1 = (p.y + nextP.y) / 2;
+
+                    context.bezierCurveTo(p.x, p.y, p.cx1, p.cy1, p.cx1, p.cy1);
+                }
+            }
+
+            // context.closePath();
+            context.fill();
+        }
+
+        if (showIndicators) {
+            // Draw points
+            context.fillStyle = '#000';
+            context.beginPath();
+            for (var i = 0; i < pointsA.length; i++) {
+                var p = pointsA[i];
+
+                context.rect(p.x - 1, p.y - 1, 2, 2);
+            }
+            context.fill();
+
+            // Draw controls
+            context.fillStyle = '#f00';
+            context.beginPath();
+            for (var i = 0; i < pointsA.length; i++) {
+                var p = pointsA[i];
+
+                context.rect(p.cx1 - 1, p.cy1 - 1, 2, 2);
+                context.rect(p.cx2 - 1, p.cy2 - 1, 2, 2);
+            }
+            context.fill();
+        }
+    }
+
+    // Init
+    initButton();
+});
+    </script>
+{% endblock %}
+
+{%  block main %}
+    <div class="main">
+        <div class="re" style="position: relative;">
+          <div id="hello">
+               <a rel="nofollow" rel="noreferrer" href="#p" class="btn-liquid">
+               <span class="inner">受骗指数分布图</span>
+</a>
+          </div>
+    </div>
+	    <div class="demo">
+        <div id="quiz-container"></div>
+	</div>
+        <div id="inputbox"class="box">
+<span id="p"></span>
+	 <div id="main" style="width: 1050px;height:400px;"></div>
+
+ <script type="text/javascript">
+        // 基于准备好的dom初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        myChart.setOption({
+             title: {
+                 text: '受骗指数分布图',
+                 subtext:'百分比',
+                 sublink:'https://www.baidu.com',
+                 left:'center'
+             },
+             backgroundColor: '#fff',
+             /* textStyle: {
+                 color: 'rgba(255, 255, 255, 1)' //文本样式
+             }, */
+              tooltip :{
+                 trigger:'item',
+                 formatter:"{a} <br/> {b} : {c} ({d}%)"  //格式化输出
+             },
+			 legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: ['受骗指数0-40','受骗指数40-60','受骗指数60-70','受骗指数70-80','受骗指数80以上']
+    },
+            series : [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    roseType: 'angle', //南丁格尔饼图
+                    radius: '55%',
+                    data:[
+                        {value:10, name:'受骗指数0-40'},
+                        {value:15, name:'受骗指数40-60'},
+                        {value:35, name:'受骗指数60-70'},
+                        {value:30, name:'受骗指数70-80'},
+                        {value:10, name:'受骗指数80以上'}
+                    ],
+                    itemStyle: {
+                        normal: {
+                            shadowBlur: 20000,
+                            shadowColor: 'rgba(0, 0, 0, 1)'
+                        },
+                        emphasis: {
+                            shadowBlur: 20000,
+                            shadowColor: 'rgba(250, 0, 0, 1)'
+                        }
+
+                    },
+                    label: {
+                        normal: {
+                            textStyle: {
+                                color: 'rgba(0, 0, 0, 1)'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgba(0, 0, 0, 1)'
+                            }
+                        }
+                    }
+                }
+            ]
+        });
+ </script>
+
+
+</div>
+    </div>
+{% endblock %}

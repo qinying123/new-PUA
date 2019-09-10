@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1322535_38tv54r308c.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1322535_gkbpeprt9cu.css">
+    <link rel="shortcut icon" href="{% static 'images/logo.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/login.min.css' %}">
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/message.min.js' %}"></script>
+    <script src="{% static 'js/puaajax.min.js' %}"></script>
+    <script src="{% static 'js/front_base.min.js' %}"></script>
+    <script src="{% static 'js/login.min.js' %}"></script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo-box">
+                <a href="index.html">
+                    <img src="{% static 'images/logot.png' %}" alt="">
+                </a>
+            </div>
+
+            <ul class="nav" type="none" style="{list-style-type: none}">
+                <li class="active"><a href="/">首页</a></li>
+                <li class="active"><a href="{% url 'baike:baike_index' %}">PUA百科</a></li>
+                <li class="active"><a href="{% url 'puaheart:choose' %}">心理测试</a></li>
+                <li class="active"><a href="http://www.66rpg.com/game/uncheck/1474719">角色扮演</a></li>
+                <li class="active"><a href="{% url 'we:contract' %}">关于我们</a></li>
+            </ul>
+
+            <div class="auth-box">
+                <i class="icon-personal_set iconfont"></i>
+                {% if user.is_authenticated %}
+                    <a href="#" class="authenticated-box">{{ user.username }}</a>
+                    <div class="user-more-box">
+                        <i class="triangle"></i>
+                        {% if user.is_staff %}
+                            <a href="{% url 'cms:index' %}">管理系统</a>
+                        {% endif %}
+                        <a href="{% url 'pua_auth:logout' %}">退出登录</a>
+                    </div>
+                {% else %}
+                    <a href="#" class="signin-btn">登录</a> /
+                    <a href="#" class="signup-btn">注册</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    {% block main %}{% endblock %}
+
+    <footer class="fotter">
+        <div class="top-group">
+            <div class="top-inner-group">
+                <div class="box1">
+                    <img src="{% static 'images/logot.png' %}" alt="">
+                </div>
+                <div class="detail-group">
+                    <div class="line1">
+                        <ul type="none" class="links">
+                            <li><a href="{% url 'baike:baike_index' %}">PUA百科</a></li>
+                            <li><a href="{% url 'puaheart:choose' %}">心理测试</a></li>
+                            <li><a href="http://m.66rpg.com/h5/1417969?ohp=v2&quality=32">角色扮演</a></li>
+                            <li><a href="{% url 'we:contract' %}">关于我们</a></li>
+                        </ul>
+                    </div>
+                    <div class="line2">
+                        <p class="address">机构：济南大学信息科学与工程学院</p>
+                        <p class="contact">联系方式：17860631217(工作日9:00--18:00)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-group">
+            HTML5创意应用
+        </div>
+    </footer>
+    <div class="mask-wrapper">
+        <div class="auth-wrapper">
+            <div class="close-wrapper">
+                <span class="close-btn icon-close iconfont"></span>
+            </div>
+            <div class="auth-inner-wrapper">
+                <div class="scroll-wrapper">
+                    <div class="signin-group auth-group">
+                        <div class="top-group">
+                            <span class="title">请登录</span>
+                            <a href="javascript: void(0);" class="switch">立即注册></a>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="telephone" placeholder="请输入手机号码">
+                            </div>
+                             <div class="input-group">
+                                <input type="password" class="form-control" name="password" placeholder="请输入密码">
+                            </div>
+                            <div class="input-group">
+                                <label class="remember-label">
+                                    <input type="checkbox" name="remember" value="1">
+                                    记住我
+                                </label>
+                            </div>
+                            <div class="input-group">
+                                <input type="submit" class="submit-btn" value="立即登录">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="signup-group auth-group">
+                        <div class="top-group">
+                            <span class="title">请注册</span>
+                            <a href="javascript: void(0);" class="switch">立即登录></a>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="telephone" placeholder="手机号码">
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="username" placeholder="用户名">
+                            </div>
+                            <div class="input-group">
+                                <div class="short-input-group">
+                                    <input type="text" class="form-control" name="img_captcha" placeholder="图形验证码">
+                                </div>
+                                <div class="input-group-addon">
+                                    <img src="{% url 'pua_auth:img_captcha' %}" alt="" class="img-captcha" style="cursor: pointer;">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="password1" placeholder="密码">
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="password2" placeholder="确认密码">
+                            </div>
+                            <div class="input-group">
+                                <input type="submit" class="submit-btn" value="立即注册">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

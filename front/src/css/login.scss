@@ -1,0 +1,139 @@
+@import "constants.scss";
+@import "init.scss";
+body{
+    background: #c4c4c4;
+}
+
+.mask-wrapper{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    //overflow-y: scroll;
+    display: none;
+    z-index: 200;
+
+    .auth-wrapper{
+        width: 400px;
+        height: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -200px;
+        margin-top: -250px;
+
+        .close-wrapper{
+            width: 100%;
+            height: 40px;
+            background: #fff;
+
+            .close-btn{
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                float: right;
+                margin-top: 10px;
+                cursor: pointer;
+            }
+        }
+
+        .auth-inner-wrapper{
+            width: 100%;
+            height: 480px;
+            position: relative;
+            overflow: hidden;
+
+            .scroll-wrapper{
+                width: 400px*2;
+                //height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                //background: #fff;
+
+                .auth-group{
+                    width: 400px;
+                    padding: 0 20px 20px;
+                    box-sizing: border-box;
+
+                    .top-group{
+                        height: 36px;
+                        border-bottom: 1px solid #eee;
+                        line-height: 34px;
+                        .title{
+                            float: left;
+                            color: #232323;
+                            border-bottom: 3px solid #f86f46;
+                        }
+                        .switch{
+                            float: right;
+                            color: #f86f46;
+                        }
+                    }
+
+                    .form-group{
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                        .input-group{
+                            margin-bottom: 20px;
+                            height: 40px;
+                            .form-control{
+                                border: 1px solid #ccc;
+                                padding: 10px;
+                                width: 100%;
+                                box-sizing: border-box;
+                                height: 40px;
+                                outline: none;
+                            }
+                            .remember-label{
+                                font-size: 14px;
+                            }
+                            .submit-btn{
+                                width: 100%;
+                                height: 40px;
+                                background: #f86f46;
+                                border: none;
+                                color: #fff;
+                                cursor: pointer;
+                            }
+                            .short-input-group{
+                                width: 250px;
+                                float: left;
+                            }
+                            .input-group-addon{
+                                float: right;
+                                width: 100px;
+                                .sms-captcha-btn{
+                                    width: 100%;
+                                    height: 40px;
+                                    border: 1px solid #f86f46;
+                                    color: #f86f46;
+                                    display: inline-block;
+                                    text-align: center;
+                                    line-height: 40px;
+                                    box-sizing: border-box;
+                                    cursor: pointer;
+                                }
+                                .disabled{
+                                    color: #ccc;
+                                    border-color: #ccc;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .signin-group{
+                    float: left;
+                    background: #fff;
+                }
+                .signup-group{
+                    float: left;
+                    background: #fff;
+                }
+            }
+        }
+    }
+}

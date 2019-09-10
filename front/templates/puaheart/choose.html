@@ -1,0 +1,62 @@
+{% extends 'base/front_base.html' %}
+
+{% block title %}
+    PUA心理测试
+{% endblock %}
+
+{% block head %}
+ <script>
+	$(".title").hover(function() {
+    $(this).toggleClass("is-active");
+})
+ </script>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <link href="{% static 'css/3.min.css' %}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{%  block main %}
+    <div class="main">
+  <div class="space">
+    <div class="planet">
+        <div class="planet_shadow"></div>
+        <div class="crater1"></div>
+        <div class="crater2"></div>
+        <div class="crater3"></div>
+        <div class="crater4"></div>
+    </div>
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star pink"></div>
+			 <div class="star blackblue"></div>
+        <div class="star blue"></div>
+		<div class="star orange"></div>
+        <div class="star yellow"></div>
+    </div>
+	</div>
+
+
+
+<div class="b">
+<script src="https://wow.techbrood.com/libs/jquery/jquery-1.11.1.min.js"></script>
+
+<div class="wrap">
+    <a class="button rollover"  href="{% url 'puaheart:one' %}">
+        <span class="roll-text">恋爱ing</span>
+        <span class="roll-text">Let's Go</span>
+    </a>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="button rollover" href="{% url 'puaheart:two' %}">
+        <span class="roll-text">单身狗！</span>
+        <span class="roll-text">Let's Go</span>
+    </a>
+</div>
+</div>
+    </div>
+        <div style="clear: both;"></div>
+{% endblock %}
